@@ -4,6 +4,7 @@ from flask import session, redirect, url_for
 
 app = Flask(__name__)    #create Flask object
 
+database = {}
 
 @app.route("/", methods = ['GET', 'POST'])
 def disp_loginpage():
@@ -19,12 +20,26 @@ def authenticate():
         return redirect(url_for('disp_loginpage'))
     # if there is cookie, redirect this to response page
     if request.method == 'POST':
-        if (request.form['username'] == 'GIRLBOSS' and request.form['password'] == 'slay'):
-            session['username'] = request.form['username']
-            return redirect(url_for('disp_loginpage'))  #response to a form submission
+        if (request.form['username'] in database):
+            if (database[request.form['username']] == request.form['password']):
+                session['username'] = request.form['username']
+                return redirect(url_for('disp_loginpage'))  #response to a form submission
         else:
             return render_template('login.html', result = "username or password is incorrect")
     return render_template('login.html')
+
+
+#create registration:
+
+@app.route("/register", methods = ['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        if (request.form['username'] in database):
+            return render_template("registration.html", result = "username already exists")
+        else:
+            database[request.form['username']] = request.form['password']
+            return render_template("registration.html", result = "") 
+    return redirect(url_for('authenticate'))
 
 app.secret_key = 'girlboss'
 
