@@ -33,13 +33,18 @@ def authenticate():
 
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
+
+    return render_template("registration.html")
+        
     if request.method == 'POST':
+        print(request.form)
+        print("SKJDHFKJDSHFDSFDSFFDS")
         if (request.form['username'] in database):
+            print("IM IN UR WALLS")
             return render_template("registration.html", result = "username already exists")
         else:
             database[request.form['username']] = request.form['password']
             return render_template("registration.html", result = "") 
-    return redirect(url_for('authenticate'))
 
 app.secret_key = 'girlboss'
 
