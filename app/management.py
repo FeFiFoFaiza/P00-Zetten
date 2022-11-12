@@ -36,8 +36,8 @@ def authenticate_user(username, password):
             "SELECT password FROM users WHERE username=:username",
             {"username": username},
         ).fetchone()
-        
+
         if user_pw is not None:
             return user_pw[0] == password
 
-    return True
+    return False
