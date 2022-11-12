@@ -76,8 +76,8 @@ def register():
         return render_template("registration.html")
 
     # POST request: handle the form response and redirect
-    username = request.form["username"]
-    password = request.form["password"]
+    username = request.form['username']
+    password = request.form['password']
     
     create_user(username, password)
 

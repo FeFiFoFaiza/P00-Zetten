@@ -23,6 +23,10 @@ def create_user(username, password):
             )
             """
         )
+
+        c.execute(
+            'INSERT INTO users(username, password) VALUES (\"%s\", \"%s\")' % (username, password)
+        )
     
     return True
 
@@ -33,11 +37,12 @@ def authenticate_user(username, password):
         c = db.cursor()
 
         user_pw = c.execute(
-            "SELECT password FROM users WHERE username=:username",
-            {"username": username},
+            'SELECT password FROM `users` WHERE `users`.username = \"%s\"' % username
         ).fetchone()
-
+        print('BOY')
+        print(user_pw)
         if user_pw is not None:
+            print(user_pw[0])
             return user_pw[0] == password
 
     return False
