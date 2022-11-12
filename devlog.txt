@@ -35,7 +35,14 @@ pd 2
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
-fristL -- TIMESTAMP
+faizaL -- 2022-11-12
 --------------------------------------------------------------
-<Thing fristL did.>
+- Renamed some files
+- Put READMe in place
+==============================================================
+
+faizaL -- 2022-11-12 17:24
+--------------------------------------------------------------
+- Worked on account creation and verification logic
+- Created database with table of usernames and passwords
 ==============================================================
