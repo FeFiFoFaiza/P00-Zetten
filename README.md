@@ -16,6 +16,6 @@ This web app integrates creative collaboration with Flask and SQL technology. Us
 `$ cd /P00-Zetten`
 
 #### How to run
-`$ cd /__init__.py`
+`$ cd /app`
 
-`$ python3 app.py`
+`$ python3 __init__.py`
