@@ -1,11 +1,15 @@
+import os
+
 from flask import Flask, render_template, request
 from flask import session, redirect, url_for
 
 from management import create_user, authenticate_user
 
 app = Flask(__name__)    #create Flask object
+app.secret_key = os.urandom(32)
 
-database = {}
+#FUTURE PLANS MAKE SURE TO CHECK IF FORMS ARE VALID
+
 
 #The Landing Site'
 @app.route("/")
@@ -23,18 +27,9 @@ def index():
             username = session['username']
         )
     
-    '''If not logged in go to guest page'''
-    return render_template("guest_homepage.html")
+    '''If not logged in redirected to guest page'''
+    return render_template("landing_site.html")
         
-
-
-
-""" def disp_loginpage():
-    print(session)
-    if 'username' in session: #checks if cookie is stored
-        return render_template('response.html', username1= session['username']) #if stored, take to the response page
-    return redirect(url_for('authenticate')) # if not stored, take to login page
- """
 
 # Session clearing/Logout
 # Honestly this is for me so I know that the guest page works
@@ -43,11 +38,11 @@ def logout():
     if 'username' in session:
         session.pop('username', None)
         return redirect(url_for('index'))
-    return "test.html"
+    return "error.html"
 
 
-@app.route("/auth", methods = ['GET','POST'])
-def authenticate():
+@app.route("/login", methods = ['GET','POST'])
+def login():
 
     # GET request: display the form
     if request.method == "GET":
@@ -64,10 +59,10 @@ def authenticate():
     return render_template('login.html', result = "username or password is incorrect")
 
 
-#create registration:
-
+#create a new account:
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
+
     if "username" in session:
         return redirect(url_for('index'))
 
@@ -81,23 +76,39 @@ def register():
     
     create_user(username, password)
 
-    return redirect(url_for('authenticate'))
+    return redirect(url_for('login'))
+
+#~~~~~~~~~~~~~~~STORY STUFF~~~~~~~~~~~~~~~~
+
+#displays all stories
+@app.route("/stories")
+def stories():
+    return render_template("error.html") # a place holder
+
+#view a specific story
+
+#create a new story
+@app.route("/stories/new", methods = ['GET', 'POST'])
+def newStory():
+
+    # If the user is not logged in
+    if "username" not in session:
+        return redirect(url_for('login'))
     
-@app.route("/registerauth", methods = ['GET', 'POST'])
-def registerauth():
-    if request.method == 'POST':
-        print(request.form)
-        print("SKJDHFKJDSHFDSFDSFFDS")
-        if (request.form['username'] in database):
-            print("IM IN UR WALLS")
-            return render_template("registration.html", result = "username already exists")
-        else:
-            database[request.form['username']] = request.form['password']
-            return redirect(url_for('authenticate'))
+    if request.method == "GET":
+        return render_template("new_story.html")
+
+    title = request.form['title']
+    summary = request.form['summary']
+    content = request.form['content']
+
+    newStory_id = 123123123
+    
+
+    return render_template("error.html")
 
 
 
-app.secret_key = 'girlboss'
 
 if __name__ == "__main__": #false if this file imported as module
     #enable debugging, auto-restarting of server when this file is modified

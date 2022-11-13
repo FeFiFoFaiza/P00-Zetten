@@ -4,6 +4,8 @@ import sqlite3
 
 DB_FILE = "zetten.db"
 
+
+
 def create_user(username, password):
 
     # NOTE TO FUTURE SELF PLANS:
@@ -39,10 +41,10 @@ def authenticate_user(username, password):
         user_pw = c.execute(
             'SELECT password FROM `users` WHERE `users`.username = \"%s\"' % username
         ).fetchone()
-        print('BOY')
-        print(user_pw)
         if user_pw is not None:
             print(user_pw[0])
             return user_pw[0] == password
 
     return False
+
+def create
