@@ -1,6 +1,6 @@
 # GGG by Zetten
 
-##Roster
+## Roster
 * Vivian Graeber
 * Faiza Huda
 * Kevin Xiao
