@@ -7,12 +7,25 @@
     </head>
 
     <body>
-        Congrates {{username}} have an account and are in the homepage page
 
-        Stories you've contributed:
+        <div align="right">
+            <form action="{{ url_for('logout')}}">
+                <input type="submit", name = "logout", value = "Log Out">
+            </form>
+        </div>
 
-        <form action="/log-out">
-            <input type="submit", name = "logout", value = "Log Out">
-        </form>
+        <h2 align = "center"> Welcome {{username}}! </h2>
+
+        <h3>Stories Started</h3>
+        <!-- THIS WILL BE STORIES THAT HAVE STARTED
+             IF THERE ARENT ANY THEN WE SHALL SAY NONE 
+             IF WE WANT TO CREATE THEN WE SHALL-->
+
+        <p>Create a new story <a href="{{ url_for('newStory') }}">here</a>.</p>
+
+        <h3>Stories Contributed</h3>
+        <!-- THIS WILL BE STORIES THAT HAVE ADDED
+             IF THERE ARENT ANY THEN WE SHALL SAY NONE
+             IF WE WANT SOME MORE WE SHALL SEARCH FOR NEW ONES-->
     </body>
 </html>
