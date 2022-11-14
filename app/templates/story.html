@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        {% set title = to_render.title %}
+    </head>
+
+    {% block content %}
+
+        <div align="right">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('logout') }}">Log Out</a>
+        </div>
+
+        <h1>{{ to_render.title }} by {{ to_render.authors.username }}</h1>
+
+
+        <p> Summary: {{to_render.summary}} </p>
+
+        {%  for update in to_render.get_updates() %}
+
+            <p> {{ update.content }} </p>
+
+        {% endfor %}
+
+    {% endblock content %}
+</html>

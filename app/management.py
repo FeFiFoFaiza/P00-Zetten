@@ -1,50 +1,56 @@
-""" This will have creation and checking access to the database """
+""" This will have creation and checking access to the database 
+    THIS MAKES USER CLASS TO EASILY IDENTIFY USER IN DATABASE """
 
-import sqlite3
+from cheats import execute
+class User:
 
-DB_FILE = "zetten.db"
+    def __init__(self, id):
 
+        data = execute('SELECT * FROM `users` WHERE `users`.id=%d' % id).fetchall()
+        assert (len(data) != 0)
+        self.id = int(data[0][0])
+        self.username = data[0][1]
+        self.password = data[0][2]
 
+    @staticmethod
+    def new_user(username, password):
 
-def create_user(username, password):
+        # NOTE TO FUTURE SELF PLANS:
+        # PUT IN SOME TYPE OF HASHCODE
+        # ADD IN PARAMETERS FOR PASS AND USERNAME SIZE
+        # MAYBE ID FOR STORIES?
 
-    # NOTE TO FUTURE SELF PLANS:
-    # PUT IN SOME TYPE OF HASHCODE
-    # ADD IN PARAMETERS FOR PASS AND USERNAME SIZE
-    # MAYBE ID FOR STORIES?
-
-    with sqlite3.connect(DB_FILE) as db:
-
-        c = db.cursor()
-
-        c.execute(
-            """
-            CREATE TABLE IF NOT EXISTS users (
-                username     TEXT,
-                password     TEXT
+        execute(
+                """
+                CREATE TABLE IF NOT EXISTS users (
+                    id           INTEGER PRIMARY KEY,
+                    username     TEXT,
+                    password     TEXT
+                )
+                """
             )
-            """
-        )
 
-        c.execute(
-            'INSERT INTO users(username, password) VALUES (\"%s\", \"%s\")' % (username, password)
-        )
-    
-    return True
+        execute(
+                'INSERT INTO users(username, password) VALUES (\"%s\", \"%s\")' % (username, password)
+            )
 
-def authenticate_user(username, password):
+        return True
 
-    with sqlite3.connect(DB_FILE) as db:
 
-        c = db.cursor()
+    def authenticate_user(username, password):
 
-        user_pw = c.execute(
-            'SELECT password FROM `users` WHERE `users`.username = \"%s\"' % username
-        ).fetchone()
+        user_pw = execute(
+                'SELECT password FROM `users` WHERE `users`.username = \"%s\"' % username
+            ).fetchone()
+
         if user_pw is not None:
             print(user_pw[0])
             return user_pw[0] == password
 
-    return False
+        return False
 
-def create
+    def get_ID(username):
+
+        return execute(
+                'SELECT id FROM `users` WHERE `users`.username = \"%s\"' % username
+            ).fetchone()

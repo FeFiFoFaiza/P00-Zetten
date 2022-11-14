@@ -3,11 +3,13 @@ import os
 from flask import Flask, render_template, request
 from flask import session, redirect, url_for
 
-from management import create_user, authenticate_user
+import cheats
+from management import User
+from story import Story
 
 app = Flask(__name__)    #create Flask object
 app.secret_key = os.urandom(32)
-
+cheats.setup() 
 #FUTURE PLANS MAKE SURE TO CHECK IF FORMS ARE VALID
 
 
@@ -52,8 +54,9 @@ def login():
     psw = request.form['password']
 
     # The Log-In Worked!
-    if authenticate_user(usr, psw):
+    if User.authenticate_user(usr, psw):
         session["username"] = usr
+        session["user_id"] = User.get_ID(usr)
         return render_template('homepage.html', username = usr)
 
     return render_template('login.html', result = "username or password is incorrect")
@@ -74,7 +77,7 @@ def register():
     username = request.form['username']
     password = request.form['password']
     
-    create_user(username, password)
+    User.new_user(username, password)
 
     return redirect(url_for('login'))
 
@@ -86,6 +89,12 @@ def stories():
     return render_template("error.html") # a place holder
 
 #view a specific story
+@app.route("/stories/<id>", methods=['GET', 'POST'])
+def showStory(id):
+    story = Story(id)
+
+    return render_template('story.html', to_render = story)
+
 
 #create a new story
 @app.route("/stories/new", methods = ['GET', 'POST'])
@@ -102,10 +111,10 @@ def newStory():
     summary = request.form['summary']
     content = request.form['content']
 
-    newStory_id = 123123123
+    newStory_id = Story.new_story(User(session["user_id"]), title, summary, content)
+    newS = Story(newStory_id)
     
-
-    return render_template("error.html")
+    return redirect(f'/stories/{newStory_id}')
 
 
 
