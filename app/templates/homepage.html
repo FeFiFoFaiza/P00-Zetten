@@ -2,10 +2,12 @@
 
 <html>
 
+
     <head>
         <title> Homepage </title>
     </head>
 
+    {% block content %}
     <body>
 
         <div align="right">
@@ -17,15 +19,42 @@
         <h2 align = "center"> Welcome {{username}}! </h2>
 
         <h3>Stories Started</h3>
-        <!-- THIS WILL BE STORIES THAT HAVE STARTED
-             IF THERE ARENT ANY THEN WE SHALL SAY NONE 
-             IF WE WANT TO CREATE THEN WE SHALL-->
 
+            {% if currUsrSess.get_stories() is none %}
+                {% set word = 'one' %}
+                <p>You haven't started any stories :(</p>
+            {% else %}
+                {% set word = 'another' %}
+                <ul>
+                {%  for story in currUsrSess.get_stories() %}
+                    <li>
+                        <a href="{{ url_for('showStory', id=story.id) }}">{{ story.title }}</a>
+                    </li>
+                {%  endfor %}
+                </ul>
+            {% endif %}
         <p>Create a new story <a href="{{ url_for('newStory') }}">here</a>.</p>
 
         <h3>Stories Contributed</h3>
         <!-- THIS WILL BE STORIES THAT HAVE ADDED
              IF THERE ARENT ANY THEN WE SHALL SAY NONE
              IF WE WANT SOME MORE WE SHALL SEARCH FOR NEW ONES-->
+
+             
+            {% if currUsrSess.get_contributions() is none %}
+                {% set word = 'one' %}
+                <p>You haven't contributed to any stories :(</p>
+            {% else %}
+                {% set word = 'more' %}
+                <ul>
+                {%  for story in currUsrSess.get_contributions() %}
+                    <li>
+                        <a href="{{ url_for('showStory', id=story.id) }}">{{ story.title }}</a>
+                    </li>
+                {%  endfor %}
+                </ul>
+            {% endif %}
     </body>
+
+    {% endblock content %}
 </html>

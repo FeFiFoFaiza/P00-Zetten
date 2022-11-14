@@ -6,6 +6,7 @@ from flask import session, redirect, url_for
 import cheats
 from management import User
 from story import Story
+from currentUser import currentUser
 
 app = Flask(__name__)    #create Flask object
 app.secret_key = os.urandom(32)
@@ -26,7 +27,8 @@ def index():
 
         return render_template(
             "homepage.html",
-            username = session['username']
+            username = session['username'],
+            currUsrSess = currentUser(session['user_id'])
         )
     
     '''If not logged in redirected to guest page'''
@@ -57,7 +59,7 @@ def login():
     if User.authenticate_user(usr, psw):
         session["username"] = usr
         session["user_id"] = User.get_ID(usr)
-        return render_template('homepage.html', username = usr)
+        return render_template('homepage.html', username = usr, currUsrSess = currentUser(session["user_id"]))
 
     return render_template('login.html', result = "username or password is incorrect")
 

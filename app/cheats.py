@@ -48,5 +48,16 @@ def setup():
                 """
             )
 
+    execute(
+                """
+                INSERT INTO users (username, password)
+                SELECT 'wwww', 'www'
+                WHERE NOT EXISTS
+                    (SELECT username, password
+                    FROM users
+                    WHERE username = 'wwww' AND password = 'www')
+                """
+    )
+
     
         
