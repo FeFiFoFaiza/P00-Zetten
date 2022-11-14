@@ -93,9 +93,18 @@ def stories():
 #view a specific story
 @app.route("/stories/<id>", methods=['GET', 'POST'])
 def showStory(id):
+
+    # If the user is not logged in
+    if "username" not in session:
+        return redirect(url_for('login'))
+
     story = Story(id)
 
-    return render_template('story.html', to_render = story)
+    #If they've contributed already they can view the entire story
+    have_contributed = currentUser(session["user_id"]) in story.updates 
+
+    #If they haven't then you can only see the last part of it
+    return render_template('story.html', to_render = story, edited = have_contributed )
 
 
 #create a new story

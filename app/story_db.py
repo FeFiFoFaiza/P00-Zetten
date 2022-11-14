@@ -11,7 +11,7 @@ class StoryDB:
                 CREATE TABLE IF NOT EXISTS story_db (
                     id          INTEGER PRIMARY KEY,
                     storyID     INTEGER,
-                    content     TEXT,
+                    content     VARCHAR,
                     usrID       INTEGER
                 )
                 """

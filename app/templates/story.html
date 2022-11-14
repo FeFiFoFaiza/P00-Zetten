@@ -22,11 +22,28 @@
 
         <p> Summary: {{to_render.summary}} </p>
 
-        {%  for update in to_render.get_updates() %}
+        {% if not edited %}
 
-            <p> {{ update.content }} </p>
+            {{ to_render.get_updates()[-1].content }}<br><br>
 
-        {% endfor %}
+            <form method="post">
+                Add to the story:<br>
+                <textarea id="addition" name="addition" minlength="10" maxlength="2500" rows="10" cols="100"></textarea><br><br>
+
+                <input type="submit" value="Add to Story">
+            </form>
+
+        {% else %}
+
+        <!-- OK THIS ISNT WORKING SO PLEASE CHECK THE DATABASE AND SEE IF THERE ARE ANY NAMES ON THE STORY.UPDATES BECAUSE IT SHOULD BE THE NAMES OF PEOPLE WHO HAVE ADDED THINGS -->
+
+            {%  for update in to_render.get_updates() %}
+
+                <p> {{ update.content }} </p>
+
+            {% endfor %}
+
+        {% endif %}
 
     {% endblock content %}
 </html>
