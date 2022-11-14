@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        {% set title = to_render.title %}
+    </head>
+
+    {% block content %}
+
+        <div align="right">
+            <form action="{{ url_for('logout')}}">
+                <input type="submit", name = "logout", value = "Log Out">
+            </form>
+            <form action="{{ url_for('index')}}">
+                <input type="submit", name = "logout", value = "Home">
+            </form>
+        </div>
+
+        <h1>{{ to_render.title }} by {{ to_render.authors.username }}</h1>
+
+
+        <p> Summary: {{to_render.summary}} </p>
+
+        {% if not edited %}
+
+            {{ to_render.get_updates()[-1].content }}<br><br>
+
+            <form method="post">
+                Add to the story:<br>
+                <textarea id="addition" name="addition" minlength="10" maxlength="2500" rows="10" cols="100"></textarea><br><br>
+
+                <input type="submit" value="Add to Story">
+            </form>
+
+        {% else %}
+
+        <!-- OK THIS ISNT WORKING SO PLEASE CHECK THE DATABASE AND SEE IF THERE ARE ANY NAMES ON THE STORY.UPDATES BECAUSE IT SHOULD BE THE NAMES OF PEOPLE WHO HAVE ADDED THINGS -->
+
+            {%  for update in to_render.get_updates() %}
+
+                <p> {{ update.content }} </p>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endblock content %}
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+    
+
+    <head>
+        <title> Homepage </title>
+        <link rel="stylesheet" type="text/css"  href="/homepage.css">
+    </head>
+
+    {% block content %}
+    <body>
+
+        <div class = "header">
+            <form action="{{ url_for('logout')}}">
+                <input type="submit", name = "logout", value = "Log Out">
+            </form>
+            <h2> Welcome {{username}}! </h2>
+        </div>
+
+        
+
+        <h3>Stories Started</h3>
+
+            {% if currUsrSess.get_stories() is none %}
+                {% set word = 'one' %}
+                <p>You haven't started any stories :(</p>
+            {% else %}
+                {% set word = 'another' %}
+                <ul>
+                {%  for story in currUsrSess.get_stories() %}
+                    <li>
+                        <a href="{{ url_for('showStory', id=story.id) }}">{{ story.title }}</a>
+                    </li>
+                {%  endfor %}
+                </ul>
+            {% endif %}
+        <p>Create a new story <a href="{{ url_for('newStory') }}">here</a>.</p>
+
+        <h3>Stories Contributed</h3>
+        <!-- THIS WILL BE STORIES THAT HAVE ADDED
+             IF THERE ARENT ANY THEN WE SHALL SAY NONE
+             IF WE WANT SOME MORE WE SHALL SEARCH FOR NEW ONES-->
+
+             
+            {% if currUsrSess.get_contributions() is none %}
+                {% set word = 'one' %}
+                <p>You haven't contributed to any stories :(</p>
+            {% else %}
+                {% set word = 'more' %}
+                <ul>
+                {%  for story in currUsrSess.get_contributions() %}
+                    <li>
+                        <a href="{{ url_for('showStory', id=story.id) }}">{{ story.title }}</a>
+                    </li>
+                {%  endfor %}
+                </ul>
+            {% endif %}
+            <p>Find a story to contribute to <a href="{{ url_for('stories') }}">here</a>.</p>
+    </body>
+
+    {% endblock content %}
+</html>
