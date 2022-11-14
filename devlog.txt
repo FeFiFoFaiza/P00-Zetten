@@ -46,3 +46,28 @@ faizaL -- 2022-11-12 17:24
 - Worked on account creation and verification logic
 - Created database with table of usernames and passwords
 ==============================================================
+
+faizaL -- 2022-11-13 23:30
+--------------------------------------------------------------
+- Worked all of the database back end stuff
+- Added form/site/front end to add new stories
+- created new python files/classes for the maintenance of user info, story info, and story update info
+- Created a cheat file that sets up all the SQL tables and runs the execute command
+==============================================================
+
+faizaL -- 2022-11-14 00:33
+--------------------------------------------------------------
+- Homepage now shows stories that you've started and stories you've contributed to
+==============================================================
+
+faizaL -- 2022-11-14 00:51
+--------------------------------------------------------------
+- Made frontend/site that shows all stories in the database
+- Made form/frontend/site for adding new additions to the story
+==============================================================
+
+faizaL -- 2022-11-14 01:34
+--------------------------------------------------------------
+- Trying to block off access to reading all of the story if you haven't contributed and access if you have
+- so far failed
+==============================================================
