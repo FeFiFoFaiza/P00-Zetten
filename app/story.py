@@ -46,6 +46,15 @@ class Story:
 
         return l
 
+    def get_all_stories():
+        data = execute('SELECT storyID FROM `stories` ORDER BY storyID DESC').fetchall()
+
+        all_stories = list()
+        for d in data:
+            all_stories.append(Story(d[0]))
+
+        return all_stories
+
     @staticmethod
     def new_story(user, title, summary, content):
         execute( 'INSERT INTO `stories` (title, summary, usrID) VALUES ("%s", "%s", %d);' % (title, summary, user.id) )

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>All Stories</title>
+    </head>
+
+    <body>
+
+        <div align="right">
+            <form action="{{ url_for('logout')}}">
+                <input type="submit", name = "logout", value = "Log Out">
+            </form>
+            <form action="{{ url_for('index')}}">
+                <input type="submit", name = "logout", value = "Home">
+            </form>
+        </div>
+
+        {% block content %} 
+
+            <p>Start a new story <a href="{{ url_for('newStory') }}">here</a>.</p>
+            {% for story in all_stories %}
+                <pre> <!-- CHANGE THIS AND PUT ACTUAL TABS INSTEAD -->
+                <a href="{{ url_for('showStory', id=story.id) }}">{{ story.title }} by {{ story.authors.username }}</a>
+                    Summary: {{story.summary}}
+                </pre>
+            {%  endfor %}
+
+        {% endblock content %}
+
+
+    </body>
+
+</html>

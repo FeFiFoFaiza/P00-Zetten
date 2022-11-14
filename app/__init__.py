@@ -88,7 +88,7 @@ def register():
 #displays all stories
 @app.route("/stories")
 def stories():
-    return render_template("error.html") # a place holder
+    return render_template("archive.html", all_stories = Story.get_all_stories())
 
 #view a specific story
 @app.route("/stories/<id>", methods=['GET', 'POST'])
