@@ -26,7 +26,7 @@
 
             {{ to_render.get_updates()[-1].content }}<br><br>
 
-            <form method="post">
+            <form method="post"> <!-- PUT FORM ACTION TO REGISTER THE UPDATE ALSO MAKE REQUIREMENTS FOR TEXT SIZE -->
                 Add to the story:<br>
                 <textarea id="addition" name="addition" minlength="10" maxlength="2500" rows="10" cols="100"></textarea><br><br>
 
@@ -34,8 +34,6 @@
             </form>
 
         {% else %}
-
-        <!-- OK THIS ISNT WORKING SO PLEASE CHECK THE DATABASE AND SEE IF THERE ARE ANY NAMES ON THE STORY.UPDATES BECAUSE IT SHOULD BE THE NAMES OF PEOPLE WHO HAVE ADDED THINGS -->
 
             {%  for update in to_render.get_updates() %}
 
