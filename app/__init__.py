@@ -101,7 +101,9 @@ def showStory(id):
     story = Story(id)
 
     #If they've contributed already they can view the entire story
-    have_contributed = currentUser(session["user_id"]) in story.updates 
+    have_contributed = session["user_id"][0] == story.updates[0]
+    print("OH NA NA NA IM OUT BRO")
+    print(have_contributed)
 
     #If they haven't then you can only see the last part of it
     return render_template('story.html', to_render = story, edited = have_contributed )
