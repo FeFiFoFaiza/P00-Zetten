@@ -2,12 +2,11 @@
 <html>
     <head>
         <title>All Stories</title>
-
     </head>
 
-    <body>
+    <body align = "center">
 
-        <div class = "header">
+        <div class = "header" align = "right">
             <div class = "logoutbutton">
                 <form action="{{ url_for('logout')}}">
                     <input type="submit", name = "logout", value = "Log Out">
@@ -17,14 +16,24 @@
                 </form>
             </div>
         </div>
-        {% block content %} 
+
+        {% block content %}
+
+            <h1>All Stories</h1>
 
             <p>Start a new story <a href="{{ url_for('newStory') }}">here</a>.</p>
+            <p>Or search for a story.</p>
+            <form action = "/search" method="post"> <!-- Get method doesn't seem to wrok -->
+                <input type="text" name="query">
+                <input type="submit" name="button" value="Search">
+            </form>
+
+            <br><br>
             {% for story in all_stories %}
-                <pre> <!-- CHANGE THIS AND PUT ACTUAL TABS INSTEAD -->
-                <a href="{{ url_for('showStory', id=story.id) }}">{{ story.title }} by {{ story.authors.username }}</a>
-                    Summary: {{story.summary}}
-                </pre>
+
+                <a href="{{ url_for('showStory', id=story.id) }}">{{ story.title }} by {{ story.authors.username }}</a><br>
+                Summary: {{story.summary}}<br><br>
+
             {%  endfor %}
 
         {% endblock content %}
