@@ -79,10 +79,14 @@ faizaH -- 2022-11-14 01:34
 - so far failed
 ==============================================================
 
-<<<<<<< HEAD
-=======
 faizaH -- 2022-11-14 09:15
 --------------------------------------------------------------
 - Fixed the blocking off access to reading a story you've contributed to
 ==============================================================
->>>>>>> refs/remotes/origin/main
+
+Kevin -- 2022-11-14 9:35
+--------------------------------------------------------------
+- Linked homepage with css
+- Created external style sheet
+- Finished styling logout button
+==============================================================

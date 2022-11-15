@@ -5,16 +5,18 @@
 
     <head>
         <title> Homepage </title>
-        <link rel="stylesheet" type="text/css"  href="/homepage.css">
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
     </head>
 
     {% block content %}
     <body>
 
         <div class = "header">
-            <form action="{{ url_for('logout')}}">
-                <input type="submit", name = "logout", value = "Log Out">
-            </form>
+            <div class = "logoutbutton">
+                <form action="{{ url_for('logout')}}">
+                    <input type="submit", name = "logout", value = "Log Out">
+                </form>
+            </div>
             <h2> Welcome {{username}}! </h2>
         </div>
 
