@@ -48,9 +48,14 @@ faizaH -- 2022-11-12 14:00
 - Put READMe in place
 ==============================================================
 
+Kevin -- 2022-11-12 16:00
+--------------------------------------------------------------
+- Account creation and verfication logic with dictionaries
+==============================================================
+
 faizaH -- 2022-11-12 17:24
 --------------------------------------------------------------
-- Worked on account creation and verification logic
+- Worked on account creation and verification logic with sql databases
 - Created database with table of usernames and passwords
 ==============================================================
 
@@ -61,6 +66,9 @@ faizaH -- 2022-11-13 23:30
 - created new python files/classes for the maintenance of user info, story info, and story update info
 - Created a cheat file that sets up all the SQL tables and runs the execute command
 ==============================================================
+
+Kevin -- 2022-11-13 24:00
+- Editted html files and fixed bugs regarding to flask and jinja breaking.
 
 faizaH -- 2022-11-14 00:33
 --------------------------------------------------------------
@@ -89,4 +97,9 @@ Kevin -- 2022-11-14 9:35
 - Linked homepage with css
 - Created external style sheet
 - Finished styling logout button
+==============================================================
+
+Kevin -- 2022-11-15 0:10
+--------------------------------------------------------------
+- Finished external css stylesheet and applied to every file
 ==============================================================

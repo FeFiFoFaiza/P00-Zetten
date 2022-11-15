@@ -45,28 +45,27 @@ h3 {
 }
 
 p {
+    font-size: 20px;
     margin: 0 0 1.15em;
 }
 
 
+body {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  line-height: 1.4;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 0 10px;
+  word-wrap: break-word;
+  color: #363636;
+  color: var(--text-main);
+  background: #fff;
+  background: var(--background-body);
+  text-rendering: optimizeLegibility;
+}
 
-  input[type='button']:hover {
-    background: #9b9b9b;
-    background: var(--button-hover);
-  }
-  
-  input[type='color'] {
-    min-height: 2rem;
-    padding: 8px;
-    cursor: pointer;
-  }
-  
-  input[type='checkbox'],
-  input[type='radio'] {
-    height: 1em;
-    width: 1em;
-  }
-  
-  input[type='radio'] {
-    border-radius: 100%;
-  }
+pre {
+  font_size: 40px;
+  margin: 0 0 1.15em;
+}
+
