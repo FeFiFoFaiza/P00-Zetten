@@ -140,6 +140,32 @@ def newStory():
     
     return redirect(f'/stories/{newStory_id}')
 
+#search for a story
+@app.route("/search", methods = ['GET', 'POST'])
+def search():
+
+    qualified_stories = []
+    query = None
+
+    if request.method == "POST" and len(request.form['query']) > 0: #makes sure smth is in query bar
+
+        query = request.form['query'] #cannot put .lower() here because we want to return og capitalization later
+        
+        for s in Story.get_all_stories():
+
+            if query.lower() in s.title.lower():
+
+                qualified_stories.append(s)
+
+            elif query.lower() in s.summary.lower():
+
+                qualified_stories.append(s)
+
+            elif query.lower() in s.authors.username.lower():
+
+                qualified_stories.append(s)
+
+    return render_template('search-results.html', search = query, results = qualified_stories)
 
 
 

@@ -92,6 +92,39 @@ def setup():
                 """
     )
 
+    execute( 
+                """
+                INSERT INTO stories (title, summary, usrID)
+                SELECT 'Pineapples are cool', 'random song lyrics as I continously fill this form out', '2'
+                WHERE NOT EXISTS
+                    (SELECT title, summary, usrID
+                    FROM stories
+                    WHERE title = 'Pineapples are cool' AND summary = 'random song lyrics as I continously fill this form out' AND usrID = '2')
+                """
+    )
+
+    execute( 
+                """
+                INSERT INTO story_db (storyID, content, usrID)
+                SELECT '2', 'Stirs of whispers trail and linger You still haunt the corners of my heart', '2'
+                WHERE NOT EXISTS
+                    (SELECT storyID, content, usrID
+                    FROM story_db
+                    WHERE storyID = '2' AND content = 'Stirs of whispers trail and linger You still haunt the corners of my heart' AND usrID = '2')
+                """
+    ) 
+
+    execute( 
+                """
+                INSERT INTO story_db (storyID, content, usrID)
+                SELECT '2', 'Singing me to sleep. Singing dont love the bottle but the bottle loves me. Sing it for me baby. Singing me to sleep. Singing dont love the bottle with a deeper disdain.', '1'
+                WHERE NOT EXISTS
+                    (SELECT storyID, content, usrID
+                    FROM story_db
+                    WHERE storyID = '2' AND content = 'Singing me to sleep. Singing dont love the bottle but the bottle loves me. Sing it for me baby. Singing me to sleep. Singing dont love the bottle with a deeper disdain.' AND usrID = '1')
+                """
+    ) 
+
 
 
     

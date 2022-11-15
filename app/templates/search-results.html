@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <title> Results for '{{ search }}' </title>
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    </head>
+
+
+
+    <body align = "center">
+        {% block content %}
+
+            <div class = "header">
+                <div class = "logoutbutton">
+                    <form action="{{ url_for('logout')}}">
+                        <input type="submit", name = "logout", value = "Log Out">
+                    </form>
+                    <form action="{{ url_for('index')}}">
+                        <input type="submit", name = "logout", value = "Home">
+                    </form>
+                </div>
+            </div>
+
+            <h1>Results  for '{{ search }}':</h1>
+
+            <a href="{{ url_for('stories') }}">Go back to all stories.</a><br>
+            <form method="post">
+                <input type="text" name="query">
+                <input type="submit" name="button" value="Search">
+            </form>
+            <br><br>
+
+            {{results|length}} results found:<br><br>
+
+            {% if results|length > 0 %}
+                {% for story in results %}
+                    <a href="{{ url_for('showStory', id=story.id) }}">{{ story.title }} by {{ story.authors.username }}</a><br>
+                    Summary: {{story.summary}}<br><br>
+                {%  endfor %}
+            {% else %}
+                White is the absence of color and in your case, your story.
+            {% endif %}
+
+        {% endblock content %}
+
+    </body>
+    
+</html>
