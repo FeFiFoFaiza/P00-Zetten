@@ -30,6 +30,7 @@
 
             {{ to_render.get_updates()[-1].content }}<br><br>
 
+            {{ warning }}
             <form action="/stories/{{ to_render.id }}" method="post">
                 Add to the story:<br>
                 <textarea id="addition" name="addition" minlength="10" maxlength="2500" rows="10" cols="100"></textarea><br><br>

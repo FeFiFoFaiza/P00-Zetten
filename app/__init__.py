@@ -100,6 +100,7 @@ def showStory(id):
         return redirect(url_for('login'))
 
     story = Story(id)
+    error = "Write more than 10 words"
 
     #If they've contributed already they can view the entire story
     have_contributed = session["user_id"][0] in story.updates
@@ -112,12 +113,18 @@ def showStory(id):
 
         edit = request.form['addition']
 
+        if len(edit.split(" ")) < 10:
+
+            error = "That was less than 10. Now you must start again."
+
+            return render_template('story.html', to_render = story, edited = have_contributed, warning = error )
+
         StoryDB.new_update(story, edit, currentUser(session["user_id"]))
 
         return redirect(f'/stories/{id}')
 
     #If they haven't then you can only see the last part of it
-    return render_template('story.html', to_render = story, edited = have_contributed )
+    return render_template('story.html', to_render = story, edited = have_contributed, warning = error )
 
 
 #create a new story
