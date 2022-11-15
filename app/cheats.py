@@ -31,7 +31,7 @@ def setup():
                 CREATE TABLE IF NOT EXISTS story_db (
                     id          INTEGER PRIMARY KEY,
                     storyID     INTEGER,
-                    content     VARCHAR,
+                    content     TEXT,
                     usrID       INTEGER
                 )
                 """
