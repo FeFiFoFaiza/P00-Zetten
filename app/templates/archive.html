@@ -17,12 +17,12 @@
             </div>
         </div>
         {% block content %} 
-
             <p>Start a new story <a href="{{ url_for('newStory') }}">here</a>.</p>
+            
             {% for story in all_stories %}
-                <pre> <!-- CHANGE THIS AND PUT ACTUAL TABS INSTEAD -->
-                <a href="{{ url_for('showStory', id=story.id) }}">{{ story.title }} by {{ story.authors.username }}</a>
-                    Summary: {{story.summary}}
+                <pre>
+                    <p><a href="{{ url_for('showStory', id=story.id) }}">{{ story.title }} by {{ story.authors.username }}</a>
+Summary: {{story.summary}}</p>
                 </pre>
             {%  endfor %}
 

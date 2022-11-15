@@ -45,6 +45,7 @@ h3 {
 }
 
 p {
+    font-size: 20px;
     margin: 0 0 1.15em;
 }
 
@@ -61,5 +62,10 @@ body {
   background: #fff;
   background: var(--background-body);
   text-rendering: optimizeLegibility;
+}
+
+pre {
+  font_size: 40px;
+  margin: 0 0 1.15em;
 }
 
