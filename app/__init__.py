@@ -7,6 +7,7 @@ import cheats
 from management import User
 from story import Story
 from currentUser import currentUser
+from story_db import StoryDB
 
 app = Flask(__name__)    #create Flask object
 app.secret_key = os.urandom(32)
@@ -101,9 +102,19 @@ def showStory(id):
     story = Story(id)
 
     #If they've contributed already they can view the entire story
-    have_contributed = session["user_id"][0] == story.updates[0]
-    print("OH NA NA NA IM OUT BRO")
+    have_contributed = session["user_id"][0] in story.updates
+
     print(have_contributed)
+    print(story.updates)
+    print(session["user_id"][0])
+
+    if request.method == "POST":
+
+        edit = request.form['addition']
+
+        StoryDB.new_update(story, edit, currentUser(session["user_id"]))
+
+        return redirect(f'/stories/{id}')
 
     #If they haven't then you can only see the last part of it
     return render_template('story.html', to_render = story, edited = have_contributed )

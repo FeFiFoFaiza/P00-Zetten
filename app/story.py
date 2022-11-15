@@ -22,7 +22,7 @@ class Story:
         data = execute('SELECT * FROM `stories` WHERE `stories`.storyID=%d' % int(id)).fetchall()
         assert (len(data) != 0)
 
-        updates = execute('SELECT usrID FROM `story_db` WHERE `story_db`.id=%d' % int(id)).fetchall()
+        updates = execute('SELECT usrID FROM `story_db` WHERE `story_db`.storyID=%d' % int(id)).fetchall()
         assert (len(data) != 0)
 
         self.id = data[0][0]
@@ -32,6 +32,8 @@ class Story:
 
         self.updates = list()  # ids of all the users who added to the story
         for a in updates:
+            print("ATTENTION")
+            print(a)
             self.updates.append(a[0])
 
     def get_updates(self):
@@ -41,8 +43,6 @@ class Story:
         l = list()
         for update in updates:
             l.append(StoryDB(update[0]))
-
-        l.append("Yikes baby")
 
         return l
 
